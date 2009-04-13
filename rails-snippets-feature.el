@@ -223,7 +223,7 @@
        ("reai" "redirect_to :action => '$${show}', :id => $${item}" "redirect_to (action, id)")
        ("rec" "redirect_to :controller => '$${items}'" "redirect_to (controller)")
        ("reca" "redirect_to :controller => '$${items}', :action => '$${list}'" "redirect_to (controller, action)")
-       ("recai" "redirect_to :controller => '$${items}', :action => '$${show}', :id => $${item}" "redirect_to (controller, action, id)")) ; redirecto_to
+       ("recai" "redirect_to :controller => '$${items}', :action => '$${show}', :id => $${item}" "redirect_to (controller, action, id)")) ; redirect_to
     (0 "rails" ruby-mode-abbrev-table
        ("rdl" "RAILS_DEFAULT_LOGGER.debug '$${message}'$." "RAILS_DEFAULT_LOGGER.debug")
        ("nr" "@$${item}.new_record?" "item.new_record?")) ; rails
@@ -235,6 +235,7 @@
        ("vpif" "validates_presence_of :$${attribute}, :if => proc { |obj| $${condition} }" "validates_presence_of if")
        ("vp" "validates_presence_of :$${attribute}" "validates_presence_of")
        ("vl" "validates_length_of :$${attribute}, :within => $${20}" "validates_length_of")
+       ("vf" "validates_format_of :$${attribute}, :with => $${reg}" "validates_format_of")
        ("bt" "belongs_to :$${model}" "belongs_to")
        ("hm" "has_many :$${objects}" "has_many")
        ("hmt" "has_many :$${objects}, :through => :$${,rails-snippets-feature:prev-has-many-table-name}" "has_many :through")

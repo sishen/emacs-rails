@@ -143,6 +143,13 @@ it does not exist, ask to create it using QUESTION as a prompt."
      (rails-core:file
       (rails-core:controller-file controller-name)))))
 
+(defun rails-core:view-exist-p (view-name)
+  "Return t if view VIEW-NAME directory exist."
+  (when view-name
+    (file-exists-p
+     (rails-core:file
+      (rails-core:views-dir view-name)))))
+
 (defun rails-core:controller-file-by-model (model)
   (when model
     (let* ((controller (pluralize-string model)))

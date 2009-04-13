@@ -54,7 +54,10 @@
                                                     (rails-core:fixture-exist-p (rails-core:current-model)))))
         ([goto-mailer]     '(menu-item "Go to Mailer"
                                        rails-model-layout:switch-to-mailer
-                                       :enable (rails-core:mailer-exist-p (rails-core:current-mailer)))))
+                                       :enable (rails-core:mailer-exist-p (rails-core:current-mailer))))
+        ([goto-view]       '(menu-item "Go to View"
+                                       rails-model-layout:switch-to-view
+                                       :enable (rails-core:view-exist-p (pluralize-string rails-core:current-model)))))
       (define-keys map
         ((rails-key "m")         'rails-model-layout:switch-to-model)
         ((rails-key "u")         'rails-model-layout:switch-to-unit-test)
@@ -62,13 +65,14 @@
         ((rails-key "c")         'rails-model-layout:switch-to-controller)
         ((rails-key "x")         'rails-model-layout:switch-to-fixture)
         ((rails-key "n")         'rails-model-layout:switch-to-mailer)
+        ((rails-key "v")         'rails-model-layout:switch-to-view)
         ([menu-bar rails-model-layout] (cons name menu))))
     map))
 
 (defun rails-model-layout:switch-to (type)
   (let* ((name (capitalize (substring (symbol-name type) 1)))
          (model (rails-core:current-model))
-         (controller (rails-core:current-controller))
+         (controller (pluralize-string model))
          (mailer (rails-core:current-mailer))
          (item (if controller controller model))
          (item (case type
@@ -77,7 +81,8 @@
                  (:fixture (rails-core:fixture-file model))
                  (:unit-test (rails-core:unit-test-file item))
                  (:model (rails-core:model-file model))
-                 (:migration (rails-core:migration-file-by-model model)))))
+                 (:migration (rails-core:migration-file-by-model model))
+                 (:view (rails-core:views-dir (controller))))))
     (if item
         (let ((file (rails-core:file item)))
           (if (file-exists-p file)
@@ -93,6 +98,7 @@
 (defun rails-model-layout:switch-to-unit-test () (interactive) (rails-model-layout:switch-to :unit-test))
 (defun rails-model-layout:switch-to-model () (interactive) (rails-model-layout:switch-to :model))
 (defun rails-model-layout:switch-to-migration () (interactive) (rails-model-layout:switch-to :migration))
+(defun rails-model-layout:switch-to-view () (interactive) (rails-model-layout:switch-to :view))
 
 (defun rails-model-layout:menu ()
   (interactive)
@@ -110,6 +116,8 @@
         (add-to-list 'item (cons "Fixture" :fixture)))
       (when (rails-core:controller-exist-p controller)
         (add-to-list 'item (cons "Controller" :controller)))
+      (when (rails-core:view-exist-p controller)
+        (add-to-list 'item (cons "View" :view)))
       (unless (eq type :unit-test)
         (add-to-list 'item (cons "Unit Test" :unit-test)))
       (unless (eq type :model)
