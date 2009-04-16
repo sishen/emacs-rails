@@ -158,6 +158,8 @@
        ("h" "<h1 id=\"$${alpha}\">$${paste}</h1>" "heading")
        ("ft" "<%= form_tag :action => \"$${update}\" %>\n$.\n<%= end_form_tag %>" "form_tag")
        ("ff" "<%= form_for :$${item}, :action => \"$${update}\" %>\n$.\n<% end %>" "form_for")
+       ("jit" "<%= javascript_include_tag \"$${1}\" %>" "javascript_include_tag")
+       ("slt" "<%= stylesheet_link_tag \"$${1}\" %>" "stylesheet_link_tag")
        ("form" "<form action=\"$${action}\" method=\"$${post}\" accept-charset=\"utf-8\">\n$>$.\n\n$><p><input type=\"submit\" value=\"Continue &rarr;\"/></p>\n</form>" "form")
        ("dtht" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\n$>\"http://www.w3.org/TR/html4/strict.dtd\">\n" "HTML -- 4.01 Strict")
        ("dchttr" "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\n$>\"http://www.w3.org/TR/html4/loose.dtd\">\n" "HTML -- 4.01 Transitional")

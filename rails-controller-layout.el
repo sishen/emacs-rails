@@ -138,8 +138,11 @@ If the action is nil, return all views for the controller."
                                        :enable (and (not (rails-core:current-mailer))
                                                     (not (eq (rails-core:buffer-type) :controller)))))
         ([goto-view]       '(menu-item "Go to View"
-                                       rails-controller-layout:switch-to-view
+                                       rails-controller-layout:switch-to-view-dir
                                        :enable (rails-core:view-exist-p (rails-core:current-controller))))
+        ([goto-action-view] '(menu-item "Go to Action View"
+                                        rails-controller-layout:toggle-action-view
+                                        :enable (rails-core:action-view-exist-p (rails-core:current-action))))
         ([goto-utest]      '(menu-item "Go to Unit Test"
                                        rails-controller-layout:switch-to-unit-test
                                        :enable (rails-core:current-mailer))))
@@ -150,7 +153,8 @@ If the action is nil, return all views for the controller."
         ((rails-key "f") 'rails-controller-layout:switch-to-functional-test)
         ((rails-key "c") 'rails-controller-layout:switch-to-controller)
         ((rails-key "u") 'rails-controller-layout:switch-to-unit-test)
-        ((rails-key "v") 'rails-controller-layout:switch-to-view)
+        ((rails-key "v") 'rails-controller-layout:switch-to-view-dir)
+        ((rails-key "a") 'rails-controller-layout:toggle-action-view)
         ([menu-bar rails-controller-layout] (cons name menu))))
     map))
 
@@ -165,7 +169,7 @@ If the action is nil, return all views for the controller."
                  (:controller (rails-core:controller-file controller))
                  (:model (rails-core:model-file model))
                  (:unit-test (rails-core:unit-test-file mailer))
-                 (:view (rails-core:views-dir controller))
+                 (:view-dir (rails-core:views-dir controller))
                  (:migration (rails-core:migration-file-by-model model)))))
     (if item
         (let ((file (rails-core:file item)))
@@ -182,7 +186,7 @@ If the action is nil, return all views for the controller."
 (defun rails-controller-layout:switch-to-model () (interactive) (rails-controller-layout:switch-to :model))
 (defun rails-controller-layout:switch-to-migration () (interactive) (rails-controller-layout:switch-to :migration))
 (defun rails-controller-layout:switch-to-unit-test () (interactive) (rails-controller-layout:switch-to :unit-test))
-(defun rails-controller-layout:switch-to-view () (interactive) (rails-controller-layout:switch-to :view))
+(defun rails-controller-layout:switch-to-view-dir () (interactive) (rails-controller-layout:switch-to :view-dir))
 
 (defun rails-controller-layout:menu ()
   (interactive)

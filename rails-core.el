@@ -150,6 +150,13 @@ it does not exist, ask to create it using QUESTION as a prompt."
      (rails-core:file
       (rails-core:views-dir view-name)))))
 
+(defun rails-core:action-view-exist-p (action-name)
+  "Return t if action view exist."
+  (message "action name %s." action-name)
+  (when action-name
+    (file-exists-p
+     (rails-core:view-name action-name))))
+
 (defun rails-core:controller-file-by-model (model)
   (when model
     (let* ((controller (pluralize-string model)))
