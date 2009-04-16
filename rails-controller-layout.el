@@ -140,9 +140,6 @@ If the action is nil, return all views for the controller."
         ([goto-view]       '(menu-item "Go to View"
                                        rails-controller-layout:switch-to-view-dir
                                        :enable (rails-core:view-exist-p (rails-core:current-controller))))
-        ([goto-action-view] '(menu-item "Go to Action View"
-                                        rails-controller-layout:toggle-action-view
-                                        :enable (rails-core:action-view-exist-p (rails-core:current-action))))
         ([goto-utest]      '(menu-item "Go to Unit Test"
                                        rails-controller-layout:switch-to-unit-test
                                        :enable (rails-core:current-mailer))))

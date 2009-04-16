@@ -152,7 +152,6 @@ it does not exist, ask to create it using QUESTION as a prompt."
 
 (defun rails-core:action-view-exist-p (action-name)
   "Return t if action view exist."
-  (message "action name %s." action-name)
   (when action-name
     (file-exists-p
      (rails-core:view-name action-name))))
@@ -256,12 +255,14 @@ it does not exist, ask to create it using QUESTION as a prompt."
 
 (defun rails-core:view-name (name)
   "Return the file name of view NAME."
-  (concat (rails-core:views-dir (rails-core:current-controller))
-          name ".rhtml")) ;; BUG: will fix it
+  (let ((views (rails-core:view-files rails-core:current-controller name)))
+    (if (>= (length views) 1)
+        (find-file (first views))
+      (message "view name %s not exists." name)
+      )))
 
 (defun rails-core:helper-file (controller)
-  "Return the helper file name for the controller named
-CONTROLLER."
+  "Return the helper file name for the controller named CONTROLLER."
   (if (string= "Test/TestHelper" controller)
       (rails-core:file (rails-core:file-by-class "Test/TestHelper"))
     (when controller
