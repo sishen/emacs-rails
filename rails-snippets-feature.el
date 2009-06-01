@@ -250,6 +250,7 @@
        ("acl" "add_column :$${,rails-snippets-feature:migration-table-name}, :$${column}, :$${string}" "add column")
        ("ai" "add_index :$${,rails-snippets-feature:migration-table-name}, $${column}" "add index")
        ("aiu" "add_index :$${,rails-snippets-feature:migration-table-name}, $${column}, :unique => true" "add unique index")
+       ("rmi" "remove_index :$${,rails-snippets-feature:migration-table-name}, $${column}" "remove index")
        ("rmcl" "remove_column :$${,rails-snippets-feature:migration-table-name}, :$${column}" "remove column")
        ("recl" "rename_column :$${column}, :$${new_column}" "rename column")
        ("dt" "drop_table :$${,rails-snippets-feature:migration-table-name}$." "drop table")

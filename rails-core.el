@@ -133,7 +133,8 @@ it does not exist, ask to create it using QUESTION as a prompt."
     (concat "app/controllers/"
             (rails-core:file-by-class
              (rails-core:short-controller-name controller-name) t)
-            (unless (string-equal controller-name "Application") "_controller")
+            (unless (and (string-equal controller-name "Application")
+                     (file-exists-p (rails-core:file "app/controllers/application_controller"))) "_controller")
             ".rb")))
 
 (defun rails-core:controller-exist-p (controller-name)

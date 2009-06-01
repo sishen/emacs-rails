@@ -265,7 +265,8 @@
   ((rails-key "\C-c d v") 'rails-rake:migrate-to-version)
   ((rails-key "\C-c d p") 'rails-rake:migrate-to-prev-version)
   ((rails-key "\C-c d t") 'rails-rake:clone-development-db-to-test-db)
-
+  ((rails-key "\C-c d u") 'rails-rake:migration-version-up)
+  ((rails-key "\C-c d d") 'rails-rake:migration-version-down)
 
 
   ;; Tests

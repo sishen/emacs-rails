@@ -94,6 +94,36 @@
      (when (< 2  (length versions))
        (nth 1 versions)))))
 
+(defun rails-rake:migrate-version (&optional version direction)
+  "Run the db:migration:(up|down) task"
+  (interactive)
+  (rails-rake:task
+   (concat
+    "db:migrate"
+    (cond ((string-equal direction "up") ":up")
+          ((string-equal direction "down") ":down"))
+    (typecase version
+      (integer (format " VERSION=%.3i" version))
+      (string (format " VERSION=%s" version))))))
+
+(defun rails-rake:migration-version-up (&optional version)
+  "Run up migration with VERSION."
+  (interactive (rails-completing-read "Version of migration"
+                                      (rails-core:migration-versions t)
+                                      nil
+                                      t))
+  (when version
+    (rails-rake:migrate-version version "up")))
+  
+(defun rails-rake:migration-version-down (&optional version)
+  "Run up migration with VERSION."
+  (interactive (rails-completing-read "Version of migration"
+                                      (rails-core:migration-versions t)
+                                      nil
+                                      t))
+  (when version
+    (rails-rake:migrate-version version "down")))
+
 ;; This function was originally defined anonymously in ui. It was defined here so keys
 ;; can be added to it dryly
 (defun rails-rake:clone-development-db-to-test-db ()
