@@ -563,6 +563,12 @@ If the action is nil, return all views for the controller."
     (when (search-backward-regexp "^[ ]*def \\([a-z0-9_]+\\)" nil t)
       (match-string-no-properties 1))))
 
+(defun rails-core:current-migration-version ()
+  "Return the current migration version"
+  (let ((name (buffer-file-name)))
+    (when (string-match "db\\/migrate\\/\\([0-9]+\\)[a-z0-9_]+\.[a-z]+$" name)
+      (match-string 1 name))))
+
 ;;;;;;;;;; Determination of buffer type ;;;;;;;;;;
 
 (defun rails-core:buffer-file-match (regexp)

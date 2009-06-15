@@ -97,6 +97,8 @@
 (defun rails-rake:migrate-version (&optional version direction)
   "Run the db:migration:(up|down) task"
   (interactive)
+  (if (string-equal "" version)
+      (setq version (rails-core:current-migration-version)))
   (rails-rake:task
    (concat
     "db:migrate"
