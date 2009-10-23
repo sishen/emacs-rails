@@ -70,6 +70,11 @@
 (require 'rails-spec)
 (require 'rails-config)
 
+;;;;;;;;;; require cucumber-mode ;;;;;;;;
+
+(add-to-list 'load-path (file-name-as-directory (concat (file-name-directory (or load-file-name buffer-file-name)) "cucumber-mode")))
+(require 'feature-mode)
+
 ;;;;;;;;;; Variable definition ;;;;;;;;;;
 
 (defgroup rails nil
@@ -447,6 +452,7 @@ necessary."
 
 
 (autoload 'haml-mode "haml-mode" "" t)
+(autoload 'cucumber-mode "cucumber-mode" "Mode for editing cucumber files" t)
 
 (setq auto-mode-alist  (cons '("\\.rb$"      . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.rake$"    . ruby-mode) auto-mode-alist))
@@ -459,6 +465,7 @@ necessary."
 (setq auto-mode-alist  (cons '("\\.rjs$"     . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.rhtml$"   . html-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.erb$"     . html-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\.feature$"  . feature-mode) auto-mode-alist))
 
 (modify-coding-system-alist 'file "\\.rb$"     'utf-8)
 (modify-coding-system-alist 'file "\\.rake$"   'utf-8)
