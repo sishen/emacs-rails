@@ -72,7 +72,7 @@
 
 ;;;;;;;;;; require cucumber-mode ;;;;;;;;
 
-(add-to-list 'load-path (file-name-as-directory (concat (file-name-directory (or load-file-name buffer-file-name)) "cucumber-mode")))
+(add-to-list 'load-path (concat (file-name-directory load-file-name) "cucumber"))
 (require 'feature-mode)
 
 ;;;;;;;;;; Variable definition ;;;;;;;;;;
