@@ -178,7 +178,7 @@
 (defun rails-nav:goto-stylesheets ()
   "Go to stylesheets."
   (interactive)
-  (rails-nav:goto-file-with-menu "public/stylesheets/" "Go to stylesheet.." "css" t))
+  (rails-nav:goto-file-with-menu "public/stylesheets/" "Go to stylesheet.." "\\(css\\|sass\\)" t))
 
 (defun rails-nav:goto-javascripts ()
   "Go to JavaScripts."

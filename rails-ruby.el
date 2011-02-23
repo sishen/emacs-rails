@@ -97,6 +97,7 @@ See the variable `align-rules-list' for more details.")
   '(("\\.rb\\'"      flymake-ruby-init)
     ("\\.rxml\\'"    flymake-ruby-init)
     ("\\.builder\\'" flymake-ruby-init)
+    ("\\.feature\\'" flymake-ruby-init)
     ("\\.rjs\\'"     flymake-ruby-init))
   "Filename extensions that switch on flymake-ruby mode syntax checks.")
 
