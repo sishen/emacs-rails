@@ -244,7 +244,23 @@ it does not exist, ask to create it using QUESTION as a prompt."
 
 (defun rails-core:js-file (js)
   "Return the path to the JavaScript file named JS."
-  (concat "public/javascripts/" js ".js"))
+  (setq jsdirs '("app/assets/javascripts/" "vendor/assets/javascripts/" "lib/assets/javascripts/" "public/javascripts/"))
+  (while jsdirs
+    (setq filename (concat (car jsdirs) js))
+    (if (file-exists-p (format "%s%s" (rails-project:root) filename))
+        (setq jsdirs '())
+      (setq jsdirs (cdr jsdirs))))
+  filename)
+
+(defun rails-core:stylesheet-name (name)
+  "Return the file name of the stylesheet named NAME."
+  (setq cssdirs '("app/assets/stylesheets/" "vendor/assets/stylesheets/" "lib/assets/stylesheets/" "public/stylesheets/"))
+  (while cssdirs
+    (setq filename (concat (car cssdirs) name))
+    (if (file-exists-p (format "%s%s" (rails-project:root) filename))
+        (setq cssdirs '())
+      (setq cssdirs (cdr cssdirs))))
+  filename)
 
 (defun rails-core:partial-name (name)
   "Return the file name of partial NAME."
@@ -302,10 +318,6 @@ CONTROLLER."
 (defun rails-core:views-dir (controller)
   "Return the view directory name for the controller named CONTROLLER."
   (format "app/views/%s/" (replace-regexp-in-string "_controller" "" (rails-core:file-by-class controller t))))
-
-(defun rails-core:stylesheet-name (name)
-  "Return the file name of the stylesheet named NAME."
-  (concat "public/stylesheets/" name ".css"))
 
 (defun rails-core:controller-name (controller-file)
   "Return the class name of the controller named CONTROLLER.
@@ -464,6 +476,32 @@ of migration."
    #'(lambda (l)
        (replace-regexp-in-string "\\.[^.]+$" "" l))
    (find-recursive-files "\\.yml$" (rails-core:file "test/fixtures/"))))
+
+(defun rails-core:javascripts ()
+  "Return a list of Javascripts."
+  (setq jsfiles '())
+  (mapcar
+   #'(lambda (f)
+       (when (file-exists-p (rails-core:file f))
+           (setq files (find-recursive-files "\\.js$" (rails-core:file f)))
+         (while files
+           (add-to-list 'jsfiles (car files) t)
+           (setq files (cdr files)))))
+   '("app/assets/javascripts" "vendor/assets/javascripts" "lib/assets/javascripts" "public/javascripts"))
+  jsfiles)
+
+(defun rails-core:stylesheets ()
+  "Return a list of stylesheets."
+  (setq cssfiles '())
+  (mapcar
+   #'(lambda (f)
+       (when (file-exists-p (rails-core:file f))
+           (setq files (find-recursive-files "\\.\\(css\\|sass\\|scss\\)$" (rails-core:file f)))
+         (while files
+           (add-to-list 'cssfiles (car files) t)
+           (setq files (cdr files)))))
+   '("app/assets/stylesheets" "vendor/assets/stylesheets" "lib/assets/stylesheets" "public/stylesheets"))
+  cssfiles)
 
 (defun rails-core:configuration-files ()
   "Return a files of files from config folder."

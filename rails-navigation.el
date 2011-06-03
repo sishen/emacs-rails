@@ -175,15 +175,31 @@
    "Go to fixture.."
    'rails-core:fixture-file))
 
+;; (defun rails-nav:goto-stylesheets ()
+;;   "Go to stylesheets."
+;;   (interactive)
+;;   (rails-nav:goto-file-with-menu "public/stylesheets/" "Go to stylesheet.." "\\(css\\|sass\\)" t))
+
+;; (defun rails-nav:goto-javascripts ()
+;;   "Go to JavaScripts."
+;;   (interactive)
+;;   (rails-nav:goto-file-with-menu "public/javascripts/" "Go to javascript.." "js" t))
+
 (defun rails-nav:goto-stylesheets ()
   "Go to stylesheets."
   (interactive)
-  (rails-nav:goto-file-with-menu "public/stylesheets/" "Go to stylesheet.." "\\(css\\|sass\\)" t))
+  (rails-nav:goto-file-with-menu-from-list
+   (rails-core:stylesheets)
+   "Go to stylesheet.."
+   'rails-core:stylesheet-name))
 
 (defun rails-nav:goto-javascripts ()
   "Go to JavaScripts."
   (interactive)
-  (rails-nav:goto-file-with-menu "public/javascripts/" "Go to javascript.." "js" t))
+  (rails-nav:goto-file-with-menu-from-list
+   (rails-core:javascripts)
+   "Go to javascript.."
+   'rails-core:js-file))
 
 ;;;;;;;;;; Goto file on current line ;;;;;;;;;;
 
