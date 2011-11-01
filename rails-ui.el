@@ -217,6 +217,7 @@
   ((rails-key "\C-c g x") 'rails-nav:goto-fixtures)
   ((rails-key "\C-c g f") 'rails-nav:goto-functional-tests)
   ((rails-key "\C-c g u") 'rails-nav:goto-unit-tests)
+  ((rails-key "\C-c g t") 'rails-nav:goto-spec-tests)
 
   ;; Switch
   ((kbd "<M-S-up>")      'rails-lib:run-primary-switch)
@@ -253,6 +254,7 @@
   ((rails-key "\C-c f p") 'rails-find:public)
   ((rails-key "\C-c f f") 'rails-find:fixtures)
   ((rails-key "\C-c f o") 'rails-find:config)
+  ((rails-key "\C-c f a") 'rails-find:app)
   ;; Spec finds
   ((rails-key "\C-c f r s") 'rails-find:spec)
   ((rails-key "\C-c f r c") 'rails-find:spec-controllers)

@@ -101,7 +101,7 @@ Emacs w3m browser."
   :group 'rails
   :type 'boolean)
 
-(defcustom rails-tags-command "ctags -e -a --Ruby-kinds=-f -o %s -R %s"
+(defcustom rails-tags-command "/usr/local/bin/ctags -e -a --Ruby-kinds=-f --tag-relative -o %s -R %s"
   "Command used to generate TAGS in Rails root"
   :group 'rails
   :type 'string)
@@ -192,7 +192,7 @@ Emacs w3m browser."
     ("sqlite3"    . sql-sqlite))
   "Sets emacs sql function for rails adapter names.")
 
-(defvar rails-tags-dirs '("app" "lib" "test" "db")
+(defvar rails-tags-dirs '("app" "lib" "test" "db" "vendor" "config")
   "List of directories from RAILS_ROOT where ctags works.")
 
 (defun rails-use-text-menu ()
@@ -459,13 +459,16 @@ necessary."
 (setq auto-mode-alist  (cons '("\\.mab$"     . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("Rakefile$"   . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.haml$"    . haml-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.rjs$"     . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.rxml$"    . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.builder$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.rjs$"     . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.rhtml$"   . html-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.erb$"     . html-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.html.erb$"   . html-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.js.erb$"     . javascript-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\.feature$"  . feature-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.scss$" . css-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("^Gemfile" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("^Rakefile" . ruby-mode) auto-mode-alist))
 
 (modify-coding-system-alist 'file "\\.rb$"     'utf-8)
 (modify-coding-system-alist 'file "\\.rake$"   'utf-8)

@@ -315,6 +315,11 @@ CONTROLLER."
     (file-exists-p
      (rails-core:file (rails-core:fixture-file model)))))
 
+(defun rails-core:spec-test-file (spec)
+  "Return the path to the spec FILE."
+  (when spec
+    (concat "spec/" (rails-core:file-by-class spec))))
+
 (defun rails-core:views-dir (controller)
   "Return the view directory name for the controller named CONTROLLER."
   (format "app/views/%s/" (replace-regexp-in-string "_controller" "" (rails-core:file-by-class controller t))))
@@ -398,6 +403,12 @@ suffix if CUT-CONTOLLER-SUFFIX is non nil."
        (remove-postfix (rails-core:class-by-file it)
                        "Test"))
    (find-recursive-files "\\.rb$" (rails-core:file "test/unit/"))))
+
+(defun rails-core:spec-tests ()
+  "Return a list of Rails spec tests."
+  (mapcar
+   #'rails-core:class-by-file
+   (find-recursive-files "_spec\\.rb$" (rails-core:file "spec/"))))
 
 (defun rails-core:observers ()
   "Return a list of Rails observers."

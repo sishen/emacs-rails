@@ -50,6 +50,7 @@
 (rails-find:gen "javascripts" "public/javascripts")
 (rails-find:gen "migrate"     "db/migrate")
 (rails-find:gen "fixtures"    "test/fixtures")
+(rails-find:gen "app"         "app")
 
 ;; Rspec
 (rails-find:gen "spec" "spec/")

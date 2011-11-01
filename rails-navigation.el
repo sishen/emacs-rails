@@ -104,6 +104,14 @@
    "Go to unit test."
    'rails-core:unit-test-file))
 
+(defun rails-nav:goto-spec-tests ()
+  "Go to functional tests."
+  (interactive)
+  (rails-nav:goto-file-with-menu-from-list
+   (rails-core:spec-tests)
+   "Go to spec test."
+   'rails-core:spec-test-file))
+
 (defun rails-nav:goto-observers ()
   "Go to observers."
   (interactive)
